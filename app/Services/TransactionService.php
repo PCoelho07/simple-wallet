@@ -33,15 +33,16 @@ class TransactionService
 
         $wallet = $this->walletService->transfer($transaction);
 
-        if ($wallet) {
-            $transaction->status = Transaction::SUCCESS;
-            $transaction->update();
-
-            TransferReceivedNotification::dispatch($transaction->to());
-
-            return $transaction;
+        if (!$wallet) {
+            return null;
         }
 
-        return null;
+        $transaction->status = Transaction::SUCCESS;
+        $transaction->update();
+
+        // TransferReceivedNotification::dispatch();
+        dispatch(new TransferReceivedNotification());
+
+        return $transaction;
     }
 }
