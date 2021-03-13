@@ -49,7 +49,7 @@ class Handler extends ExceptionHandler
     {
         if ($exception instanceof AuthorizationException) {
             if ($request->expectsJson()) {
-                return response()->json(['error' => 'This action is unauthorized.'], 403);
+                return response()->json(['message' => 'This action is unauthorized.'], 403);
             }
 
             return redirect()->route('home');
