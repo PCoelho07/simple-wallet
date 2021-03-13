@@ -19,6 +19,7 @@ class CreateTransactionsTable extends Migration
             $table->unsignedBigInteger('user_target_id');
             $table->float('value');
             $table->string('status');
+            $table->string('hash_signature');
             $table->timestamps();
 
             $table->foreign('user_source_id')

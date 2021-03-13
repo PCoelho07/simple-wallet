@@ -26,5 +26,5 @@ Route::group([
 Route::group([
     'middleware' => 'auth'
 ], function () {
-    Route::post('transaction', 'TransactionController@store')->name('transactions.store');
+    Route::post('transactions', 'TransactionController@store')->name('transactions.store');
 });

@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Models\Transaction;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class TransactionRepository
 {
@@ -27,7 +28,8 @@ class TransactionRepository
                 'user_source_id' => $payer->id,
                 'user_target_id' => $payee->id,
                 'value' => $value,
-                'status' => $status
+                'status' => $status,
+                'hash_signature' => Hash::make("{$payer->id}{$payee->id}{$value}"),
             ]);
 
             DB::commit();

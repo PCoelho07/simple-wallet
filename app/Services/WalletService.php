@@ -5,17 +5,17 @@ namespace App\Services;
 use App\Models\Transaction;
 use App\Models\Wallet;
 use App\Repositories\WalletRepository;
-use App\Services\Concerns\HasTransactionAuthorizer;
+use App\Modules\TransactionAuthorizer\Contracts\AuthorizerInterface;
 
 class WalletService
 {
-    use HasTransactionAuthorizer;
-
     protected $repositoryInstance;
+    protected $authorizer;
 
-    public function __construct(WalletRepository $repositoryInstance)
+    public function __construct(WalletRepository $repositoryInstance, AuthorizerInterface $authorizer)
     {
         $this->repositoryInstance = $repositoryInstance;
+        $this->authorizer = $authorizer;
     }
 
     public function transfer(Transaction $transaction)
@@ -42,8 +42,6 @@ class WalletService
 
     private function authorizeTransfer()
     {
-        $authorizer = $this->transactionAuthorizer();
-
-        return $authorizer->authorize();
+        return $this->authorizer->authorize();
     }
 }

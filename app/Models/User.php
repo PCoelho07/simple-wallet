@@ -30,6 +30,12 @@ class User extends Authenticatable implements JWTSubject
         'password', 'remember_token',
     ];
 
+
+    public function wallet()
+    {
+        return $this->hasOne('App\Models\Wallet');
+    }
+
     /**
      * The attributes that should be cast to native types.
      *

@@ -8,7 +8,7 @@ class Manager
     public static function make(string $authorizer)
     {
         $studlyAuthorizer = config("transaction_authorizer.drivers.{$authorizer}.class");
-        $class = "App\\Modules\\TransactionAuthorizer\\Adapters\\{$studlyAuthorizer}Authorizer";
+        $class = "App\\Modules\\TransactionAuthorizer\\Adapters\\{$studlyAuthorizer}";
 
         if (class_exists($class)) {
             return app($class);

@@ -6,8 +6,21 @@ return [
 
     'drivers' => [
         'custom_authorizer' => [
-            'class' => 'Default',
+            'class' => 'DefaultAuthorizer',
             'options' => []
-        ]
+        ],
+
+
+        /**
+         * Authorizers to use only when making tests
+         */
+        'test_authorizer_false' => [
+            'class' => 'TestAuthorizerFalse',
+            'options' => []
+        ],
+        'test_authorizer_true' => [
+            'class' => 'TestAuthorizerTrue',
+            'options' => []
+        ],
     ],
 ];

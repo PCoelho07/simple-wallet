@@ -41,7 +41,7 @@ class TransactionService
         $transaction->update();
 
         // TransferReceivedNotification::dispatch();
-        dispatch(new TransferReceivedNotification());
+        dispatch(new TransferReceivedNotification($transaction->from()->first()));
 
         return $transaction;
     }
