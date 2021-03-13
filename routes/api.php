@@ -21,3 +21,10 @@ Route::group([
     Route::post('logout', 'Auth\LoginController@logout')->name('auth.logout');
     Route::get('me', 'Auth\LoginController@me')->name('auth.me');
 });
+
+
+Route::group([
+    'middleware' => 'auth'
+], function () {
+    Route::post('transaction', 'TransactionController@store')->name('transactions.store');
+});

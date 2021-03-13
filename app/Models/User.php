@@ -58,4 +58,17 @@ class User extends Authenticatable implements JWTSubject
     {
         return [];
     }
+
+
+    /**
+     * The guard for `laravel-permissions` to use.
+     *
+     * Patching `Spatie\Permission\Guard` because it's not picking up Laravel's default.
+     *
+     * @return string
+     */
+    public function guardName(): string
+    {
+        return 'api';
+    }
 }

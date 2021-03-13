@@ -16,7 +16,7 @@ class UserPolicy
      */
     public function transfer(User $user)
     {
-        return $user->can('make transfers');
+        return $user->can('make transfers') ? $this->allow() : $this->deny();
     }
 
     /**
@@ -26,6 +26,6 @@ class UserPolicy
      */
     public function receiveTransfer(User $user)
     {
-        return $user->can('receive transfers');
+        return $user->can('receive transfers') ? $this->allow() : $this->deny();
     }
 }

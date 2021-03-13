@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Wallet extends Model
 {
 
+    protected $guarded = [];
+
     public function canMakeTransfer($value)
     {
         return ($this->value - $value) >= 0;

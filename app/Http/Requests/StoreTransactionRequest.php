@@ -24,9 +24,9 @@ class StoreTransactionRequest extends FormRequest
     public function rules()
     {
         return [
-            "value" => ['required', 'decimal'],
-            "payer" => ['required', 'decimal'],
-            "payee" => ['required', 'decimal'],
+            "value" => ['required', 'numeric'],
+            "payer" => ['required', 'numeric'],
+            "payee" => ['required', 'numeric'],
         ];
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Jobs\TransferReceivedNotification;
 use App\Models\Transaction;
 use App\Repositories\TransactionRepository;
 
@@ -16,6 +17,12 @@ class TransactionService
         $this->walletService = $walletService;
     }
 
+    /**
+     *  Create a transaction and make a transfer
+     *
+     *  @param array $attributes
+     *  @return Transaction|null
+     */
     public function create(array $attributes)
     {
         $transaction = $this->repositoryInstance->store($attributes);
@@ -29,10 +36,12 @@ class TransactionService
         if ($wallet) {
             $transaction->status = Transaction::SUCCESS;
             $transaction->update();
-            // disptach do job de notificação
+
+            TransferReceivedNotification::dispatch($transaction->to());
+
+            return $transaction;
         }
 
-
-        return $transaction;
+        return null;
     }
 }

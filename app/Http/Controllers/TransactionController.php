@@ -6,16 +6,20 @@ use App\Http\Requests\StoreTransactionRequest;
 use App\Models\User;
 use App\Services\TransactionService;
 
-class TransactionController extends Controller
+class TransactionController extends BaseController
 {
 
     protected $serviceInstance;
 
-    public function __contruct(TransactionService $serviceInstance)
+    public function __construct(TransactionService $serviceInstance)
     {
         $this->serviceInstance = $serviceInstance;
     }
 
+    /**
+     * Create a transaction between two users
+     * @param StoreTransactionRequest
+     */
     public function store(StoreTransactionRequest $request)
     {
         $this->authorize('transfer', User::class);

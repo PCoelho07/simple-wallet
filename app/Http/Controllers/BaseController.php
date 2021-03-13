@@ -23,6 +23,6 @@ class BaseController extends Controller
         return response()->json([
             'success' => false,
             'error' => $errorMessage
-        ], $errorCode);
+        ], (int)$errorCode);
     }
 }

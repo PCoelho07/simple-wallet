@@ -14,14 +14,18 @@ class TransactionRepository
         DB::beginTransaction();
         try {
 
-            $payer = User::firstOrFail($attributes['payer']);
-            $payee = User::firstOrFail($attributes['payee']);
+            $payer = User::findOrFail($attributes['payer']);
+            $payee = User::findOrFail($attributes['payee']);
             $value = $attributes['value'];
             $status = $attributes['status'] ?? Transaction::FAILED;
 
+            if (!$payer->hasRole('user')) {
+                throw new \Exception("This action is unauthorized.", 1);
+            }
+
             $transaction = Transaction::create([
-                'user_source' => $payer->id,
-                'user_target' => $payee->id,
+                'user_source_id' => $payer->id,
+                'user_target_id' => $payee->id,
                 'value' => $value,
                 'status' => $status
             ]);
