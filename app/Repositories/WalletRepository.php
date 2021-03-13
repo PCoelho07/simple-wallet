@@ -7,7 +7,14 @@ use Illuminate\Support\Facades\DB;
 
 class WalletRepository
 {
-
+    /**
+     * Transfer money between two wallets
+     * @param Wallet $walletSource
+     * @param Wallet $walletTarget
+     * @param float $value
+     *
+     * @return bool
+     */
     public function transfer(Wallet $walletSource, Wallet $walletTarget, $value)
     {
         DB::beginTransaction();

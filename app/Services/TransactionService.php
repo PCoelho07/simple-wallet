@@ -18,7 +18,8 @@ class TransactionService
     }
 
     /**
-     *  Create a transaction and make a transfer
+     *  Create a transaction with default status FAILED and
+     *  change to SUCCESS if transfer was successfull
      *
      *  @param array $attributes
      *  @return Transaction|null
@@ -40,7 +41,6 @@ class TransactionService
         $transaction->status = Transaction::SUCCESS;
         $transaction->update();
 
-        // TransferReceivedNotification::dispatch();
         dispatch(new TransferReceivedNotification($transaction->from()->first()));
 
         return $transaction;

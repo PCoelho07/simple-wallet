@@ -18,6 +18,12 @@ class WalletService
         $this->authorizer = $authorizer;
     }
 
+    /**
+     * Execute the needed business logics to transfer
+     *
+     * @param Transaction $transaction
+     * @return bool
+     */
     public function transfer(Transaction $transaction)
     {
         $hasAuthorization = $this->authorizeTransfer();
@@ -40,6 +46,11 @@ class WalletService
         return $this->repositoryInstance->transfer($walletUserSource, $walletUserTarget, $valueTransaction);
     }
 
+    /**
+     * Check if has authorization to make a transfer
+     *
+     * @return bool
+     */
     private function authorizeTransfer()
     {
         return $this->authorizer->authorize();

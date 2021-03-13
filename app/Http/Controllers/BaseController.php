@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class BaseController extends Controller
 {
+    /**
+     * Json response with success
+     *
+     * @param Model $resource
+     */
     protected function responseSuccess(Model $resource)
     {
         return response()->json([
@@ -15,6 +20,11 @@ class BaseController extends Controller
         ]);
     }
 
+    /**
+     * Json failed response
+     *
+     * @param string $action
+     */
     protected function responseFailed(string $action = '')
     {
         $errorMessage = __("errors.messages.{$action}");
@@ -23,6 +33,6 @@ class BaseController extends Controller
         return response()->json([
             'success' => false,
             'error' => $errorMessage
-        ], (int)$errorCode);
+        ], (int) $errorCode);
     }
 }
